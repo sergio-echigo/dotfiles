@@ -1,0 +1,45 @@
+/* all */
+* {
+	margin: 0px;
+	padding: 0px;
+
+	font-family: FiraCode SemiBold;
+	
+	font-size: 12px;
+	font-weight: bold;
+
+	border: none;
+	border-radius: 0;
+}
+
+/* main window */
+window#waybar {
+	color: #FFF;
+	background-color: rgba(15, 15, 15, 0.98);
+	
+	border-bottom: solid 3px #00999f;
+}
+
+.modules-right * {
+	margin-right: 15px;
+}
+
+/* sway/workspaces module */
+#workspaces button * {
+	padding: 0 10px 0 10px;
+	
+	font-size: 14px;
+
+	color: #BBB;
+	background-color: #111;
+
+	border-bottom: solid 3px #00ff9f;
+}
+
+#workspaces button.focused *{
+	color: #d600ff;
+	background-color: #FFF;
+
+	font-size: 16px;
+	border-bottom: solid 3px #00ff9f;
+}

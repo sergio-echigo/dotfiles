@@ -1,0 +1,45 @@
+{
+	"layer": "top",
+	"position": "top",
+
+	"height": 35,
+
+	"modules-left": [ "sway/workspaces" ],
+	"modules-center": [ "custom/time" ],
+	"modules-right": [ "wireplumber", "sway/language", "network", "custom/date" ],
+
+	"fixed-center": true,
+
+	"wireplumber": {
+		"format": "{volume}%"
+	},
+
+	"sway/language": {
+		"format": "{shortDescription}"
+	},
+
+	"network": {
+		"format-wifi": "{essid}  ",
+		"format-ethernet": "{ipaddr}",
+		"format-disconnected": ""
+	},
+
+	"battery": {
+		"bat": "BAT0",
+		"full-at": 90,
+		"interval": 60,
+
+		"states": { "warning": 30, "critical": 15 },
+		"format": "{capacity}%  {icon}",
+
+		"format-icons": ["", "", "", "", ""]
+	},
+
+	"custom/date": {
+		"exec": "~/.config/waybar/date.sh"
+	},
+
+	"custom/time": {
+		"exec": "~/.config/waybar/time.sh"
+	}
+}
