@@ -1,0 +1,49 @@
+{
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "hyprland/submap",
+        "network",
+        "backlight",
+        "battery",
+        "bluetooth"
+    ],
+    "reload_style_on_change": true,
+    "hyprland/workspaces": {
+        "format": "{id}"
+    },
+    "clock": {
+        "format": "{:%H:%M %d/%m/%Y}"
+    },
+    "hyprland/submap": {
+        "always-on": true,
+        "default-submap": "N"
+        // "on-click": "toggle submap mode command. idk yet how"
+    },
+    "backlight": {
+        "format": "{percent}% {icon}"
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%"
+    },
+    "network": {
+        "format-wifi": "{essid}",
+        "format-disconnected": "Disconnected"
+    },
+
+    // ToDo: set bluetooth configuraiton
+    "bluetooth": {
+        "format-no-controller": ""
+    }
+}

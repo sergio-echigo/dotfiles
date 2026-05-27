@@ -55,6 +55,5 @@ local function my_on_attach(bufnr)
     vim.keymap.set("n", "n", api.fs.create, opts("Create"))
 end
 
-require("nvim-tree").setup({ on_attach = my_on_attach })
-
-
+require("nvim-tree").setup({ 
+    on_attach = my_on_attach})

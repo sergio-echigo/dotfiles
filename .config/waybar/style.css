@@ -1,0 +1,154 @@
+@import "colors.css";
+
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "SauceCodePro Nerd Font Mono", monospace;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 0;
+}
+
+/* ── Bar ──────────────────────────────────────────────────────────────────── */
+
+window#waybar {
+    background-color: alpha(@background, 0.85);
+    color: @on_background;
+    border-bottom: 1px solid @outline_variant;
+}
+
+/* ── Modules shared ───────────────────────────────────────────────────────── */
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: transparent;
+}
+
+/* Every widget gets consistent pill spacing */
+.modules-right > widget > * {
+    margin: 4px 0px 4px 0;
+    padding: 2px 12px;
+    border-radius: 0px;
+    background-color: @surface_variant;
+    color: @on_surface_variant;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.modules-right > widget > *:hover {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+
+/* ── Workspaces ───────────────────────────────────────────────────────────── */
+
+#workspaces {
+    margin: 4px 0 4px 8px;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 0px 10px;
+    margin-right: 0px;
+    border-radius: 0px;
+    background-color: @surface_variant;
+    color: @on_surface_variant;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+#workspaces button:hover {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+
+#workspaces button.active {
+    background-color: @primary;
+    color: @on_primary;
+}
+
+#workspaces button.urgent {
+    background-color: @error;
+    color: @on_error;
+}
+
+/* ── Clock ────────────────────────────────────────────────────────────────── */
+
+#clock {
+    padding: 2px 16px;
+    margin: 4px 0;
+    border-radius: 0px;
+    /*background-color: @primary_container;*/
+    color: @on_primary_container;
+}
+
+/* ── Submap ───────────────────────────────────────────────────────────────── */
+
+#submap {
+    padding: 0px 12px;
+    border-radius: 0px;
+    background-color: @surface_variant;
+    color: @on_surface_variant;
+}
+
+#submap.empty {
+    background-color: @surface_variant;
+    color: @on_surface_variant;
+}
+
+/* ── Network ──────────────────────────────────────────────────────────────── */
+
+#network.disconnected {
+    background-color: @error_container;
+    color: @on_error_container;
+}
+
+/* ── Battery ──────────────────────────────────────────────────────────────── */
+
+#battery.warning {
+    background-color: @tertiary_container;
+    color: @on_tertiary_container;
+}
+
+#battery.critical {
+    background-color: @error_container;
+    color: @on_error_container;
+}
+
+#battery.critical:not(.charging) {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        background-color: @error;
+        color: @on_error;
+    }
+}
+
+#battery.charging,
+#battery.plugged {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}
+
+/* ── Backlight ────────────────────────────────────────────────────────────── */
+
+#backlight {
+    /* inherits the default .modules-right pill style */
+}
+
+/* ── Bluetooth ────────────────────────────────────────────────────────────── */
+
+#bluetooth {
+    /* empty when no controller — hidden naturally since format-no-controller is "" */
+}
+
+#bluetooth.connected {
+    background-color: @secondary_container;
+    color: @on_secondary_container;
+}

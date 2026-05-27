@@ -9,6 +9,8 @@
 -- Create your files separately and then require them like this:
 -- require("myColors")
 
+require("colors")
+
 
 ------------------
 ---- MONITORS ----
@@ -44,7 +46,7 @@ local menu        = "hyprlauncher"
 --
 hl.on("hyprland.start", function () 
   hl.exec_cmd("awww-daemon")
---  hl.exec_cmd("waybar & hyprpaper & firefox")
+  hl.exec_cmd("waybar")
 end)
 
 
@@ -89,10 +91,10 @@ hl.config({
 
         border_size = 2,
 
-        col = {
-            active_border   = { colors = { "#E0A84B" } },
-            inactive_border = "rgba(595959aa)",
-        },
+--        col = {
+--            active_border   = { colors = { "#E0A84B" } },
+--            inactive_border = "rgba(595959aa)",
+--        },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
         resize_on_border = false,
@@ -108,8 +110,8 @@ hl.config({
         rounding_power = 0,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity   = 0.87,
-        inactive_opacity = 0.8,
+        active_opacity   = 1,
+        inactive_opacity = 1,
 
         shadow = {
             enabled      = true,
@@ -118,13 +120,43 @@ hl.config({
             color        = 0xee1a1a1a,
         },
 
+        --        blur = {
+        --            enabled   = true,
+        --            size      = 10,
+        --            passes    = 2,
+        --            vibrancy  = 0.1696,
+
         blur = {
-            enabled   = true,
-            size      = 3,
-            passes    = 2,
-            vibrancy  = 0.1696,
+            enabled = true,
+
+            -- Glass effect strength
+            size = 10,
+            passes = 4,
+
+            -- Better performance + cleaner blur
+            new_optimizations = true,
+            xray = true,
+
+            -- Glass aesthetics
+            noise = 0.02,
+            contrast = 1.15,
+            brightness = 0.82,
+            vibrancy = 0.25,
+            vibrancy_darkness = 0.15,
+
+            -- Blur popups/menus too
+            popups = true,
+            popups_ignorealpha = 0.2,
+
+            -- Blur special workspace
+            special = true,
+
+            -- Respect transparent windows
+            ignore_opacity = false,
         },
     },
+
+
 
     animations = {
         enabled = true,
@@ -291,19 +323,19 @@ hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "down" }))
 
 -- Resize submap:
-hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
-hl.define_submap("resize", function()
-	hl.bind(mainMod .. " + left",  hl.dsp.window.resize({x = -40, y = 0, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + right",  hl.dsp.window.resize({x = 40, y = 0, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + up",  hl.dsp.window.resize({x = 0, y = -40, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + down",  hl.dsp.window.resize({x = 0, y = 40, relative = true}), { repeating = true })
+hl.bind(mainMod .. " + R", hl.dsp.submap("R"))
+hl.define_submap("R", function()
+	hl.bind("left",  hl.dsp.window.resize({x = -40, y = 0, relative = true}), { repeating = true })
+	hl.bind("right",  hl.dsp.window.resize({x = 40, y = 0, relative = true}), { repeating = true })
+	hl.bind("up",  hl.dsp.window.resize({x = 0, y = -40, relative = true}), { repeating = true })
+	hl.bind("down",  hl.dsp.window.resize({x = 0, y = 40, relative = true}), { repeating = true })
 
-	hl.bind(mainMod .. " + h",  hl.dsp.window.resize({x = -40, y = 0, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + l",  hl.dsp.window.resize({x = 40, y = 0, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + k",  hl.dsp.window.resize({x = 0, y = -40, relative = true}), { repeating = true })
-	hl.bind(mainMod .. " + j",  hl.dsp.window.resize({x = 0, y = 40, relative = true}), { repeating = true })
+	hl.bind("h",  hl.dsp.window.resize({x = -40, y = 0, relative = true}), { repeating = true })
+	hl.bind("l",  hl.dsp.window.resize({x = 40, y = 0, relative = true}), { repeating = true })
+	hl.bind("k",  hl.dsp.window.resize({x = 0, y = -40, relative = true}), { repeating = true })
+	hl.bind("j",  hl.dsp.window.resize({x = 0, y = 40, relative = true}), { repeating = true })
 
-	hl.bind("escape", hl.dsp.submap("reset"))
+    hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
 -- bind = hl.bind(mainMod .. " + r"
@@ -395,4 +427,11 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+hl.window_rule({
+    name = "kitty-opacity",
+    match = { class = "^(kitty)$" },
+
+    opacity = "0.88 0.82"
 })

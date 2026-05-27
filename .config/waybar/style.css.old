@@ -1,0 +1,20 @@
+@import "colors.css";
+
+* {
+    margin: 0;
+    padding: 0;
+
+    color: whitesmoke;
+
+    font-family: SauceCodePro Nerd Font Mono;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+window#waybar {
+    background: rgba(50, 50, 50, 0.9);
+}
+
+.modules-right * {
+    margin-right: 40px;
+}
