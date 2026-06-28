@@ -13,8 +13,3 @@ output_path = '~/.config/hypr/colors.lua'
 [templates.waybar]
 input_path = "~/.config/matugen/templates/waybar.conf"
 output_path = "~/.config/waybar/colors.css"
-
-[templates.omp]
-input_path  = '~/.config/matugen/templates/oh-my-posh.json'
-output_path = '~/.config/oh-my-posh/themes/matugen.json'
-post_hook   = 'pkill -SIGUSR1 $(pgrep -x zsh || pgrep -x bash)'

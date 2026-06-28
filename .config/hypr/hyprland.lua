@@ -106,8 +106,8 @@ hl.config({
     },
 
     decoration = {
-        rounding       = 0,
-        rounding_power = 0,
+        rounding       = 2,
+        rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1,
@@ -119,42 +119,51 @@ hl.config({
             render_power = 3,
             color        = 0xee1a1a1a,
         },
-
-        --        blur = {
-        --            enabled   = true,
-        --            size      = 10,
-        --            passes    = 2,
-        --            vibrancy  = 0.1696,
-
         blur = {
             enabled = true,
-
-            -- Glass effect strength
-            size = 10,
-            passes = 4,
-
-            -- Better performance + cleaner blur
-            new_optimizations = true,
+            size = 5,
+            passes = 3,
             xray = true,
-
-            -- Glass aesthetics
-            noise = 0.02,
-            contrast = 1.15,
-            brightness = 0.82,
             vibrancy = 0.25,
-            vibrancy_darkness = 0.15,
+            new_optimizations = true,
 
-            -- Blur popups/menus too
-            popups = true,
-            popups_ignorealpha = 0.2,
+             -- Blur popups/menus too
+             popups = true,
+             popups_ignorealpha = 0.2,
 
-            -- Blur special workspace
-            special = true,
-
-            -- Respect transparent windows
-            ignore_opacity = false,
+             -- Blur special workspace
+             special = true,
         },
     },
+    --    blur = {
+    --        enabled = true,
+
+    --        -- Glass effect strength
+    --        size = 6,
+    --        passes = 1,
+
+    --        -- Better performance + cleaner blur
+    --        new_optimizations = true,
+    --        xray = true,
+
+    --        -- Glass aesthetics
+    --        noise = 0.017,
+    --        contrast = 1.15,
+    --        brightness = 0.82,
+    --        vibrancy = 0.25,
+    --        vibrancy_darkness = 0.15,
+
+    --        -- Blur popups/menus too
+    --        popups = true,
+    --        popups_ignorealpha = 0.2,
+
+    --        -- Blur special workspace
+    --        special = true,
+
+    --        -- Respect transparent windows
+    --        ignore_opacity = false,
+    --    },
+    --},
 
 
 
@@ -213,6 +222,7 @@ hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
+        permanent_direction_override = true
     },
 })
 
@@ -285,7 +295,11 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 -- Terminal emulator
+hl.bind(mainMod .. " + RETURN", hl.dsp.layout("preselect right"))
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
+
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.layout("preselect down"))
+hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
 
 -- Closing windows:
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
@@ -420,6 +434,12 @@ hl.window_rule({
 -- })
 -- overlayLayerRule:set_enabled(false)
 
+hl.layer_rule({
+    name = "waybar",
+    match = { namespace = "waybar" },
+    blur = true
+})
+
 -- Hyprland-run windowrule
 hl.window_rule({
     name  = "move-hyprland-run",
@@ -433,5 +453,5 @@ hl.window_rule({
     name = "kitty-opacity",
     match = { class = "^(kitty)$" },
 
-    opacity = "0.88 0.82"
+    opacity = "0.89 0.82"
 })
