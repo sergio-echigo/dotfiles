@@ -30,10 +30,12 @@ window#waybar {
     background: transparent;
 }
 
+.modules-right > widget > *, #workspaces > button {
+	padding: 0px 15px 0px 15px;
+}
+
 /* Every widget gets consistent pill spacing */
 .modules-right > widget > * {
-    margin: 4px 0px 4px 0;
-    padding: 2px 12px;
     border-radius: 0px;
     background-color: @surface_variant;
     color: @on_surface_variant;
@@ -48,12 +50,10 @@ window#waybar {
 /* ── Workspaces ───────────────────────────────────────────────────────────── */
 
 #workspaces {
-    margin: 4px 0 4px 8px;
     background: transparent;
 }
 
 #workspaces button {
-    padding: 0px 10px;
     margin-right: 0px;
     border-radius: 0px;
     background-color: @surface_variant;
@@ -79,8 +79,7 @@ window#waybar {
 /* ── Clock ────────────────────────────────────────────────────────────────── */
 
 #clock {
-    padding: 2px 16px;
-    margin: 4px 0;
+    margin: 2px 0;
     border-radius: 0px;
     /*background-color: @primary_container;*/
     color: @on_primary_container;
@@ -89,7 +88,7 @@ window#waybar {
 /* ── Submap ───────────────────────────────────────────────────────────────── */
 
 #submap {
-    padding: 0px 12px;
+    /*padding: 0px 12px;*/
     border-radius: 0px;
     background-color: @surface_variant;
     color: @on_surface_variant;

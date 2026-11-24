@@ -31,6 +31,8 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal    = "kitty"
+local applicationLauncher = "fuzzel"
+local defaultBrowser = "chromium"
 local fileManager = "dolphin"
 local menu        = "hyprlauncher"
 
@@ -45,8 +47,8 @@ local menu        = "hyprlauncher"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("awww-daemon")
   hl.exec_cmd("waybar")
+  hl.exec_cmd("awww-daemon")
 end)
 
 
@@ -56,9 +58,12 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
 
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+
+hl.env("HYPRCURSOR_SIZE", "26")
+hl.env("XCURSOR_SIZE", "24")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -87,7 +92,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in  = 3,
-        gaps_out = 5,
+        gaps_out = 10,
 
         border_size = 2,
 
@@ -301,6 +306,12 @@ hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.layout("preselect down"))
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
 
+-- Fuzzel (Application launcher):
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(applicationLauncher)) 
+
+-- Default browser initialization:
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(defaultBrowser)) 
+
 -- Closing windows:
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 
@@ -310,6 +321,12 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 -- hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+
+-- Switching windows:
+hl.bind("ALT + TAB", function()
+	hl.dispatch(hl.dsp.window.cycle_next())
+	hl.dispatch(hl.dsp.window.bring_to_top())
+end)
 
 -- Move focus with mainMod + arrow keys + vim-based keys:
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -325,7 +342,7 @@ hl.bind(mainMod .. " + j",  hl.dsp.focus({ direction = "down" }))
 -- Setting fullscreen:
 hl.bind(mainMod .. " + SPACE", hl.dsp.window.fullscreen({ mode = "maximized" }))
 
--- Swapping binds:
+-- Swapping Window binds:
 hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.swap({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.swap({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.swap({ direction = "up" }))
@@ -335,6 +352,10 @@ hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "left" })
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "down" }))
+
+-- Going through different namespaces:
+hl.bind(mainMod .. " + comma", hl.dsp.focus({workspace = "e-1"}))
+hl.bind(mainMod .. " + period", hl.dsp.focus({workspace = "e+1"}))
 
 -- Resize submap:
 hl.bind(mainMod .. " + R", hl.dsp.submap("R"))
@@ -377,6 +398,9 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
+-- Screenshot bind:
+hl.bind("Print", hl.dsp.exec_cmd("print"))
 
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
@@ -454,4 +478,11 @@ hl.window_rule({
     match = { class = "^(kitty)$" },
 
     opacity = "0.89 0.82"
+})
+
+hl.window_rule({
+	name = "initialize-floated-windows",
+	match = { class = ".*" },
+	float = true,
+	size = { 800, 450 }
 })

@@ -13,29 +13,29 @@
  *   @import "colors.css";
  */
 
-@define-color background          #1a1110;
-@define-color surface             #1a1110;
-@define-color surface_variant     #534340;
-@define-color on_background       #f1dfdb;
-@define-color on_surface          #f1dfdb;
-@define-color on_surface_variant  #d8c2be;
-@define-color outline             #a08c89;
-@define-color outline_variant     #534340;
+@define-color background          #131318;
+@define-color surface             #131318;
+@define-color surface_variant     #47464f;
+@define-color on_background       #e5e1e9;
+@define-color on_surface          #e5e1e9;
+@define-color on_surface_variant  #c8c5d0;
+@define-color outline             #928f99;
+@define-color outline_variant     #47464f;
 
-@define-color primary             #ffb4a7;
-@define-color on_primary          #561e16;
-@define-color primary_container   #73342a;
-@define-color on_primary_container #ffdad4;
+@define-color primary             #c4c0ff;
+@define-color on_primary          #2d2960;
+@define-color primary_container   #434078;
+@define-color on_primary_container #e3dfff;
 
-@define-color secondary           #e7bdb6;
-@define-color on_secondary        #442925;
-@define-color secondary_container #5d3f3a;
-@define-color on_secondary_container #ffdad4;
+@define-color secondary           #c7c4dc;
+@define-color on_secondary        #302e42;
+@define-color secondary_container #464559;
+@define-color on_secondary_container #e4dff9;
 
-@define-color tertiary            #ddc48c;
-@define-color on_tertiary         #3e2e04;
-@define-color tertiary_container  #564519;
-@define-color on_tertiary_container #fbe0a6;
+@define-color tertiary            #ebb9d0;
+@define-color on_tertiary         #472638;
+@define-color tertiary_container  #603b4f;
+@define-color on_tertiary_container #ffd8e9;
 
 @define-color error               #ffb4ab;
 @define-color on_error            #690005;
